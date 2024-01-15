@@ -37,7 +37,7 @@ TEST_F(CountAndSumTest, CTest1) {
     EXPECT_EQ(result.second, 100);
 }
 
-// Пример теста2
+// Пример теста 2
 TEST_F(CountAndSumTest, CTest2) {
 // Вызываем функцию countAndSum с тестовыми данными
     result = countAndSum(arr);
