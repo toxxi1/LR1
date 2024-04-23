@@ -2,17 +2,16 @@
 #include <gtest/gtest.h>
 #include <vector>
 #include <utility>
-
-// Подробнее https://google.github.io/googletest/reference/testing.html
+using namespace std;
 
 // Тестовый класс
-class CountAndSumTest : public ::testing::Test {
+class process_arrayTest : public ::testing::Test {
 protected:
     // Здесь вы можете добавить дополнительные настройки для тестов
     // в функции SetUp()
     void SetUp() override {
         // Например, инициализация данных
-        arr = {10, 14, 15, 20, 21, 25, 30};
+        arr = { 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0 };
     }
 
     // Здесь вы можете освободить ресурсы, если это необходимо
@@ -23,51 +22,110 @@ protected:
     }
 
     // Объявляем переменные, которые будут использоваться в тестах
-    std::vector<int> arr;
-    std::pair<int, int> result;
+    vector<int> arr;
+    pair<int, vector<int>> result;
 };
 
-// Пример теста1
-TEST_F(CountAndSumTest, CTest1) {
-// Вызываем функцию countAndSum с тестовыми данными
-    result = countAndSum(arr);
+//Тест1
+TEST_F(process_arrayTest, FlowGraphTest) {
+    vector<int> arr;
+    pair<int, vector<int>> result;
 
-// Проверяем ожидаемые результаты
-    EXPECT_EQ(result.first, 5);
-    EXPECT_EQ(result.second, 100);
-}
-
-// Пример теста111111
-TEST_F(CountAndSumTest, CTest11111) {
-// Вызываем функцию countAndSum с тестовыми данными
-    result = countAndSum(arr);
-
-// Проверяем ожидаемые результаты
-    EXPECT_EQ(result.first, 5);
-    EXPECT_EQ(result.second, 100);
-}
-
-// Пример теста 2
-TEST_F(CountAndSumTest, CTest2) {
-// Вызываем функцию countAndSum с тестовыми данными
-    result = countAndSum(arr);
-
-// Проверяем ожидаемые результаты
-    EXPECT_EQ(result.first, 15);
-    EXPECT_EQ(result.second, 100);
-}
-
-// Пример теста3
-TEST(CountAndSumTest1, CTest3) {
-    // Объявляем переменные, которые будут использоваться в тесте
-    std::vector<int> arr;
-    std::pair<int, int> result;
     // Инициализация данных
-    arr = {10, 14, 15, 20, 21, 25, 30, 35, 5};
-// Вызываем функцию countAndSum с тестовыми данными
-    result = countAndSum(arr);
+    arr = { 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0 };
 
-// Проверяем ожидаемые результаты
-    EXPECT_EQ(result.first, 6);
-    EXPECT_EQ(result.second, 105);
+    // Вызываем функцию abc с тестовыми данными
+    result = abc(arr);
+
+    // Проверяем ожидаемые результаты
+    EXPECT_EQ(result.first, 1);
+    EXPECT_EQ(result.second, arr);
+}
+//Тест2, проверка массива с 1 числом
+TEST_F(process_arrayTest, ConditionTest) {
+    vector<int> arr;
+    pair<int, vector<int>> result;
+
+    // Инициализация данных
+    arr = { 100 };
+
+    // Вызываем функцию abc с тестовыми данными
+    result = abc(arr);
+
+    // Проверяем ожидаемые результаты
+    EXPECT_EQ(result.first, 1);
+    EXPECT_EQ(result.second, arr);
+}
+
+//Тест3, проверка массива с отрицательными числами по убыванию
+TEST_F(process_arrayTest, NegativeDescendingTest) {
+    vector<int> arr;
+    pair<int, vector<int>> result;
+
+    arr = { -1, -2, -3, -4, -5 };
+
+    result = abc(arr);
+    EXPECT_EQ(result.first, 1);
+    EXPECT_EQ(result.second, arr);
+}
+
+//Тест4, проверка массива с отрицательными числами по возрастанию
+TEST_F(process_arrayTest, NegativeAscendingTest) {
+    vector<int> arr;
+    pair<int, vector<int>> result;
+
+    arr = { -5, -4, -3, -2, -1 };
+
+
+    result = abc(arr);
+    EXPECT_EQ(result.first, 0);
+    EXPECT_EQ(result.second, arr);
+}
+
+// Тест5, проверка большого массива по возрастанию
+TEST_F(process_arrayTest, ArraySizeTest) {
+    vector<int> arr;
+    pair<int, vector<int>> result;
+
+    for (int size = 1; size <= 1024; size += 52) {
+        arr.resize(size);
+        // Заполняем массив значениями, чтобы проверить функцию на разных размерах
+        for (int i = 0; i < size; ++i) {
+            arr[i] = static_cast<double>(i);
+        }
+    }
+    result = abc(arr);
+    EXPECT_EQ(result.first, 0);
+    EXPECT_EQ(result.second, arr);
+}
+
+// Тест6, проверка большого массива по убыванию
+TEST_F(process_arrayTest, NegativeArraySizeTest) {
+    vector<int> arr;
+    pair<int, vector<int>> result;
+
+    for (int size = 1; size <= 1024; size += 52) {
+        arr.resize(size);
+        // Заполняем массив значениями, чтобы проверить функцию на разных размерах
+        for (int i = 1023; i < size - 100; i = i - 1) {
+            arr[i] = static_cast<double>(i);
+        }
+    }
+    result = abc(arr);
+    EXPECT_EQ(result.first, 1);
+    EXPECT_EQ(result.second, arr);
+}
+
+// Тест7, проверка большого массива по возрастанию, с отрицательными числами.
+TEST_F(process_arrayTest, NegativeArraySizeTest1) {
+    vector<int> arr;
+    pair<int, vector<int>> result;
+
+    for (int i = -500; i <= 500; ++i) {
+        arr.push_back(i); // Заполнение вектора числами от -500 до 500
+    }
+
+    result = abc(arr);
+    EXPECT_EQ(result.first, 0);
+    EXPECT_EQ(result.second, arr);
 }
