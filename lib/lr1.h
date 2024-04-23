@@ -1,5 +1,10 @@
 #pragma once
 
-#include <vector>
 
-std::pair<int, int> countAndSum(const std::vector<int>& array);
+#include <string>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+
+pair <bool, vector<int>> abc(vector<int>& arr);
